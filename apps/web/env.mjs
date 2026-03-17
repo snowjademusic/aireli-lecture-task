@@ -4,6 +4,7 @@ import { z } from "zod"
 export const env = createEnv({
   skipValidation: process.env.NODE_ENV !== "production" || process.env.SKIP_ENV_VALIDATION === "true",
   server: {
+    API_BASE_URL: z.string().url(),
     SHOPIFY_STOREFRONT_ACCESS_TOKEN: z.string(),
     SHOPIFY_ADMIN_ACCESS_TOKEN: z.string().optional(),
     SHOPIFY_APP_API_SECRET_KEY: z.string().optional(),
@@ -24,6 +25,7 @@ export const env = createEnv({
   },
   client: {},
   runtimeEnv: {
+    API_BASE_URL: process.env.API_BASE_URL,
     IS_DEMO_MODE: process.env.NEXT_PUBLIC_IS_DEMO_MODE,
     SHOPIFY_STOREFRONT_ACCESS_TOKEN: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "demo",
     SHOPIFY_ADMIN_ACCESS_TOKEN: process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || "demo",

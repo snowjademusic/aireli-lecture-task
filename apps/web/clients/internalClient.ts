@@ -2,10 +2,20 @@ import { PlatformAccessToken, PlatformUserCreateInput, PlatformUser } from '@ent
 import axios from 'axios';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { env } from "../env.mjs"
+
+const API_BASE_URL = env.API_BASE_URL
 
 const registerUser = async (input: PlatformUserCreateInput): Promise<Pick<PlatformUser, "id"> | undefined | null> => {
   // ToDo: Implement the registerUser function
-  return null
+    try {
+      const { data } = await axios.post(`http://localhost:3001/register`, input);
+
+      return data.user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
 };
 
 const loginUser = async (input: PlatformUserCreateInput) => {
@@ -44,3 +54,7 @@ export default {
   loginUser,
   getUser
 };
+
+// function createUser(arg0: any, input: PlatformUserCreateInput) {
+//   throw new Error('Function not implemented.');
+// }
